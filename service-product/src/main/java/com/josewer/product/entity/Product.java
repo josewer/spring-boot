@@ -1,6 +1,10 @@
 package com.josewer.product.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +12,7 @@ import java.util.Date;
 @Entity
 @Table (name = "PRODUCT")
 @Data
+@AllArgsConstructor @NoArgsConstructor @Builder
 public class Product {
 
     @Id
@@ -25,7 +30,7 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
