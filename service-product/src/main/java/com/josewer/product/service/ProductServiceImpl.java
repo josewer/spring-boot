@@ -3,14 +3,18 @@ package com.josewer.product.service;
 import com.josewer.product.entity.Category;
 import com.josewer.product.entity.Product;
 import com.josewer.product.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Override
     public List<Product> listAllProduct() {
@@ -68,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
         Product productDB = getProduct(id);
 
         if (productDB == null) { return null; }
-        
+
         productDB.setStock(quantity);
 
         return productRepository.save(productDB);
